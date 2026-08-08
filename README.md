@@ -110,3 +110,9 @@ Give a ⭐️ if you like this project!
 ## Contributing
 
 Thank you for considering contributing to the attendance management system!.
+
+#list:
+
+<!-- https://github.com/dormammuuuuu/laravel-attendance-system
+https://github.com/topics/attendance-system?l=php&o=desc&s=stars
+https://github.com/aliatayee/Attendance_Management_System -->
