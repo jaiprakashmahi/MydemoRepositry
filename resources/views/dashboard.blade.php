@@ -22,9 +22,9 @@
                     <form method="GET" action="{{ route('dashboard') }}" class="flex flex-wrap items-center gap-3">
                         <select name="employee_id" class="border rounded-lg px-3 py-2 text-sm">
                             @foreach ($employees as $employee)
-                            <option value="{{ $employee->id }}" @selected($selectedEmployee && $selectedEmployee->id === $employee->id)>
-                                {{ $employee->label }}
-                            </option>
+                                <option value="{{ $employee->id }}" @selected($selectedEmployee && $selectedEmployee->id === $employee->id)>
+                                    {{ $employee->label }}
+                                </option>
                             @endforeach
                         </select>
 
@@ -37,9 +37,9 @@
                 </div>
 
                 @if ($selectedEmployee)
-                <div class="mt-4 border-l-4 border-blue-500 bg-blue-50 text-sm text-blue-800 px-4 py-2 rounded">
-                    <span class="font-semibold">Selected Employee:</span> {{ $selectedEmployee->label }}
-                </div>
+                    <div class="mt-4 border-l-4 border-blue-500 bg-blue-50 text-sm text-blue-800 px-4 py-2 rounded">
+                        <span class="font-semibold">Selected Employee:</span> {{ $selectedEmployee->label }}
+                    </div>
                 @endif
             </div>
 
@@ -82,32 +82,32 @@
                     <div class="px-4 py-3 border-b font-semibold text-gray-700">📋 Timeline</div>
                     <div class="p-4 space-y-0 max-h-[500px] overflow-y-auto">
                         @forelse (($timeline['stops'] ?? []) as $index => $stop)
-                        <div class="flex gap-3 pb-6 relative">
-                            @if (!$loop->last)
-                            <span class="absolute left-[9px] top-6 bottom-0 w-px bg-gray-200"></span>
-                            @endif
+                            <div class="flex gap-3 pb-6 relative">
+                                @if (!$loop->last)
+                                    <span class="absolute left-[9px] top-6 bottom-0 w-px bg-gray-200"></span>
+                                @endif
 
-                            <span class="mt-1 w-[18px] h-[18px] rounded-full border-4
+                                <span class="mt-1 w-[18px] h-[18px] rounded-full border-4
                                     {{ $loop->first ? 'border-green-500' : ($loop->last ? 'border-red-500' : 'border-blue-500') }}
                                     bg-white flex-shrink-0"></span>
 
-                            <div>
-                                <p class="font-semibold text-gray-800">📍 {{ $stop['name'] }}</p>
-                                <p class="text-xs text-gray-500">
-                                    {{ $stop['arrival']->format('h:i A') }}
-                                    @unless ($loop->last)
-                                    &ndash; {{ $stop['departure']->format('h:i A') }}
-                                    @else
-                                    &ndash; Now
-                                    @endunless
-                                </p>
-                                <p class="text-sm text-gray-700">
-                                    <span class="font-semibold">{{ $stop['duration_minutes'] }}</span> minutes
-                                </p>
+                                <div>
+                                    <p class="font-semibold text-gray-800">📍 {{ $stop['name'] }}</p>
+                                    <p class="text-xs text-gray-500">
+                                        {{ $stop['arrival']->format('h:i A') }}
+                                        @unless ($loop->last)
+                                            &ndash; {{ $stop['departure']->format('h:i A') }}
+                                        @else
+                                            &ndash; Now
+                                        @endunless
+                                    </p>
+                                    <p class="text-sm text-gray-700">
+                                        <span class="font-semibold">{{ $stop['duration_minutes'] }}</span> minutes
+                                    </p>
+                                </div>
                             </div>
-                        </div>
                         @empty
-                        <p class="text-sm text-gray-400 text-center py-6">No timeline data for this date.</p>
+                            <p class="text-sm text-gray-400 text-center py-6">No timeline data for this date.</p>
                         @endforelse
                     </div>
                 </div>
@@ -127,10 +127,7 @@
         if (route.length > 0) {
             const latlngs = route.map(p => [p.lat, p.lng]);
 
-            L.polyline(latlngs, {
-                color: '#2563eb',
-                weight: 4
-            }).addTo(map);
+            L.polyline(latlngs, { color: '#2563eb', weight: 4 }).addTo(map);
 
             stops.forEach((stop, i) => {
                 const color = i === 0 ? 'green' : (i === stops.length - 1 ? 'red' : '#2563eb');
@@ -142,9 +139,7 @@
                 }).addTo(map).bindPopup(`<b>${stop.name}</b><br>${stop.duration_minutes} min`);
             });
 
-            map.fitBounds(L.latLngBounds(latlngs), {
-                padding: [40, 40]
-            });
+            map.fitBounds(L.latLngBounds(latlngs), { padding: [40, 40] });
         } else {
             map.setView([25.5941, 85.1376], 13); // default: Patna
         }

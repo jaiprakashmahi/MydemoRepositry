@@ -28,7 +28,7 @@ class TrackingTimelineController extends Controller
             ? $this->timelineService->build($selectedEmployee, $date)
             : null;
 
-        return view('tracking.timeline', [
+        return view('dashboard', [
             'employees' => $employees,
             'selectedEmployee' => $selectedEmployee,
             'date' => $date,

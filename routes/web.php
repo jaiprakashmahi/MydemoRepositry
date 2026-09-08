@@ -1,30 +1,24 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TrackingTimelineController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
+| This is your project's routes/web.php with Breeze's scaffolded routes
+| kept intact -- the only change is the /dashboard route now points at
+| TrackingTimelineController instead of the static Breeze welcome view.
 */
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::get('/dashboard', [TrackingTimelineController::class, 'index'])
-    ->middleware(['auth']) // drop 'verified' if you're not using email verification
+    ->middleware(['auth', 'verified']) // drop 'verified' if you're not using email verification
     ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -33,4 +27,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

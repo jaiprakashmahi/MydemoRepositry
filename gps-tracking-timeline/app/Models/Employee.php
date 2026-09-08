@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Employee extends Model
@@ -11,6 +12,7 @@ class Employee extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'name',
         'phone',
         'designation',
@@ -24,6 +26,15 @@ class Employee extends Model
     public function locationLogs(): HasMany
     {
         return $this->hasMany(LocationLog::class);
+    }
+
+    /**
+     * The login account this employee's mobile app authenticates as
+     * (nullable — only needed once you wire up the location-logs API).
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(\App\Models\User::class);
     }
 
     /**
