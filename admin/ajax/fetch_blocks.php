@@ -15,12 +15,6 @@ header('Content-Type: application/json; charset=utf-8');
 
 $district_id = isset($_POST['district_id']) ? intval($_POST['district_id']) : 0;
 
-file_put_contents(
-    __DIR__ . '/blocks_debug.log',
-    date('Y-m-d H:i:s') . " | district_id = " . $district_id . "\n",
-    FILE_APPEND
-);
-
 if ($district_id <= 0) {
     echo json_encode(['results' => []]);
     exit;
@@ -50,12 +44,6 @@ while ($row = mysqli_fetch_assoc($result)) {
         'text' => $row['name']
     ];
 }
-
-file_put_contents(
-    __DIR__ . '/blocks_debug.log',
-    "Rows found: " . count($results) . "\n",
-    FILE_APPEND
-);
 
 echo json_encode(['results' => $results]);
 mysqli_stmt_close($stmt);
