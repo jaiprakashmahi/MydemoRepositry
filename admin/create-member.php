@@ -13,21 +13,16 @@ include 'conn.php';
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Member Management System</title>
 
-    <!-- Bootstrap 5 CSS -->
     <link rel="shortcut icon" type="image/png" href="images/favicon.png">
     <link href="vendor/wow-master/css/libs/animate.css" rel="stylesheet">
     <link href="vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
     <link href="vendor/bootstrap-datepicker-master/css/bootstrap-datepicker.min.css" rel="stylesheet">
     <link href="vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
 
-    <!-- Select2 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css">
 
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-    <!-- Style css -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/admin-standard.css" rel="stylesheet">
@@ -53,11 +48,6 @@ include 'conn.php';
         .drop-zone:hover {
             background-color: #e9ecef;
             border-color: #0056b3;
-        }
-
-        .drop-zone.dragover {
-            background-color: #d4edda;
-            border-color: #28a745;
         }
 
         .drop-zone input[type="file"] {
@@ -163,10 +153,27 @@ include 'conn.php';
             border-color: #dc3545;
         }
 
-        .text-danger {
-            color: #dc3545;
-            font-size: 0.875em;
-            margin-top: 0.25rem;
+        /* Zonal Manager chip styling */
+        .select2-container--bootstrap-5 .select2-selection--multiple .select2-selection__choice {
+            background-color: #667eea;
+            border-color: #667eea;
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin: 2px;
+            font-size: 12px;
+        }
+
+        .select2-container--bootstrap-5 .select2-selection--multiple .select2-selection__choice__remove {
+            color: #fff;
+            margin-right: 5px;
+            border-right: 1px solid rgba(255, 255, 255, 0.3);
+            padding-right: 5px;
+        }
+
+        .select2-container--bootstrap-5 .select2-selection--multiple .select2-selection__choice__remove:hover {
+            color: #ffcccc;
+            background: transparent;
         }
     </style>
 </head>
@@ -177,7 +184,6 @@ include 'conn.php';
 
         <div class="content-body">
             <div class="container-fluid">
-                <!-- Header -->
                 <div class="row mb-4">
                     <div class="col-12">
                         <div class="card">
@@ -193,7 +199,6 @@ include 'conn.php';
                     </div>
                 </div>
 
-                <!-- Members List -->
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
@@ -284,19 +289,12 @@ include 'conn.php';
                                                     echo "<td>";
                                                     if (!empty($photo_path) && file_exists('../' . $photo_path)) {
                                                         echo "<img src='../{$photo_path}' class='member-photo' alt='Member Photo' onerror='this.style.display=\"none\"; this.nextElementSibling.style.display=\"flex\";'>";
-                                                        echo "<div class='member-photo bg-secondary d-flex align-items-center justify-content-center text-white' style='display:none;'>
-                                                                <i class='fas fa-user'></i>
-                                                              </div>";
+                                                        echo "<div class='member-photo bg-secondary d-flex align-items-center justify-content-center text-white' style='display:none;'><i class='fas fa-user'></i></div>";
                                                     } else {
-                                                        echo "<div class='member-photo bg-secondary d-flex align-items-center justify-content-center text-white'>
-                                                                <i class='fas fa-user'></i>
-                                                              </div>";
+                                                        echo "<div class='member-photo bg-secondary d-flex align-items-center justify-content-center text-white'><i class='fas fa-user'></i></div>";
                                                     }
                                                     echo "</td>";
-                                                    echo "<td>
-                                                            <strong>{$row['applicant_name']}</strong><br>
-                                                            <small class='text-muted'>{$row['father_name']}</small>
-                                                          </td>";
+                                                    echo "<td><strong>{$row['applicant_name']}</strong><br><small class='text-muted'>{$row['father_name']}</small></td>";
                                                     echo "<td>{$row['mobile_number']}</td>";
                                                     echo "<td>{$row['email_id']}</td>";
                                                     echo "<td><span class='badge bg-info'>{$row['type_name']}</span></td>";
@@ -304,15 +302,9 @@ include 'conn.php';
                                                     echo "<td><span class='badge {$status_class}'>{$status_text}</span></td>";
                                                     echo "<td>
                                                             <div class='action-buttons'>
-                                                                <button class='btn btn-sm btn-info view-member' data-id='{$row['id']}' title='View'>
-                                                                    <i class='fas fa-eye'></i>
-                                                                </button>
-                                                                <button class='btn btn-sm btn-warning edit-member' data-id='{$row['id']}' title='Edit'>
-                                                                    <i class='fas fa-edit'></i>
-                                                                </button>
-                                                                <button class='btn btn-sm btn-danger delete-member' data-id='{$row['id']}' title='Delete'>
-                                                                    <i class='fas fa-trash'></i>
-                                                                </button>
+                                                                <button class='btn btn-sm btn-info view-member' data-id='{$row['id']}' title='View'><i class='fas fa-eye'></i></button>
+                                                                <button class='btn btn-sm btn-warning edit-member' data-id='{$row['id']}' title='Edit'><i class='fas fa-edit'></i></button>
+                                                                <button class='btn btn-sm btn-danger delete-member' data-id='{$row['id']}' title='Delete'><i class='fas fa-trash'></i></button>
                                                             </div>
                                                           </td>";
                                                     echo "</tr>";
@@ -340,13 +332,10 @@ include 'conn.php';
             <div class="modal-content">
                 <form id="memberForm" action="insert_member.php" method="POST" enctype="multipart/form-data">
                     <div class="modal-header bg-primary text-white">
-                        <h5 class="modal-title" id="createMemberModalLabel">
-                            <i class="fas fa-user-plus me-2"></i>Application Form
-                        </h5>
+                        <h5 class="modal-title" id="createMemberModalLabel"><i class="fas fa-user-plus me-2"></i>Application Form</h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <!-- Step Indicator -->
                         <div class="step-indicator mb-4">
                             <div class="step active" data-step="1">1. Personal Info</div>
                             <div class="step" data-step="2">2. Address</div>
@@ -355,9 +344,8 @@ include 'conn.php';
                             <div class="step" data-step="5">5. Photo & Payment</div>
                         </div>
 
-                        <!-- Tab Content -->
                         <div class="tab-content">
-                            <!-- Step 1: Personal Information -->
+                            <!-- Step 1 -->
                             <div class="tab-pane fade show active" id="step1">
                                 <div class="row">
                                     <div class="col-md-4 mb-3">
@@ -374,29 +362,23 @@ include 'conn.php';
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label class="form-label required">Mobile Number</label>
-                                        <input type="tel" class="form-control" name="mobile_number" id="mobile_number" maxlength="10" pattern="[0-9]{10}" required>
-                                        <small class="text-muted">Enter 10 digits only</small>
-                                        <div class="invalid-feedback">Mobile number must be exactly 10 digits</div>
+                                        <input type="tel" class="form-control" name="mobile_number" id="mobile_number" maxlength="10" required>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label class="form-label required">Email ID</label>
                                         <input type="email" class="form-control" name="email_id" required>
-                                        <div class="invalid-feedback">Please enter a valid email address</div>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label class="form-label">UID No (Aadhar)</label>
-                                        <input type="text" class="form-control" name="uid_no" id="uid_no" maxlength="12" pattern="[0-9]{12}">
-                                        <small class="text-muted">Enter 12 digits only</small>
+                                        <input type="text" class="form-control" name="uid_no" id="uid_no" maxlength="12">
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label class="form-label">PAN No</label>
-                                        <input type="text" class="form-control" name="pan_no" id="pan_no" maxlength="10" pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}">
-                                        <small class="text-muted">Format: ABCDE1234F</small>
+                                        <input type="text" class="form-control" name="pan_no" id="pan_no" maxlength="10">
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label class="form-label required">Date of Birth</label>
                                         <input type="date" class="form-control" name="date_of_birth" required max="<?php echo date('Y-m-d', strtotime('-18 years')); ?>">
-                                        <small class="text-muted">Must be at least 18 years old</small>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label class="form-label required">Post Applied</label>
@@ -416,7 +398,7 @@ include 'conn.php';
                                             $query = "SELECT * FROM member_types ORDER BY level";
                                             $result = mysqli_query($conn, $query);
                                             while ($row = mysqli_fetch_assoc($result)) {
-                                                echo "<option value='{$row['id']}' data-max-districts='{$row['max_districts']}' data-max-blocks='{$row['max_blocks']}'>{$row['type_name']}</option>";
+                                                echo "<option value='{$row['id']}'>{$row['type_name']}</option>";
                                             }
                                             ?>
                                         </select>
@@ -424,7 +406,7 @@ include 'conn.php';
                                 </div>
                             </div>
 
-                            <!-- Step 2: Address Information -->
+                            <!-- Step 2 -->
                             <div class="tab-pane fade" id="step2">
                                 <div class="row">
                                     <div class="col-md-12 mb-3">
@@ -453,8 +435,7 @@ include 'conn.php';
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label class="form-label required">Pincode</label>
-                                        <input type="text" class="form-control" name="pincode" id="pincode" maxlength="6" pattern="[0-9]{6}" required>
-                                        <div class="invalid-feedback">Pincode must be exactly 6 digits</div>
+                                        <input type="text" class="form-control" name="pincode" id="pincode" maxlength="6" required>
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label class="form-label required">State</label>
@@ -472,7 +453,7 @@ include 'conn.php';
                                 </div>
                             </div>
 
-                            <!-- Step 3: Education & Bank Details -->
+                            <!-- Step 3 -->
                             <div class="tab-pane fade" id="step3">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
@@ -489,11 +470,11 @@ include 'conn.php';
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Extra Qualification</label>
-                                        <input type="text" class="form-control" name="extra_qualification" placeholder="e.g., Computer Course, Language, etc.">
+                                        <input type="text" class="form-control" name="extra_qualification">
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label class="form-label">Experience</label>
-                                        <textarea class="form-control" name="experience" rows="3" placeholder="Previous work experience"></textarea>
+                                        <textarea class="form-control" name="experience" rows="3"></textarea>
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label class="form-label required">Bank Name</label>
@@ -506,7 +487,6 @@ include 'conn.php';
                                     <div class="col-md-4 mb-3">
                                         <label class="form-label required">IFSC Code</label>
                                         <input type="text" class="form-control" name="ifsc_code" id="ifsc_code" required>
-                                        <small class="text-muted">Format: SBIN0123456</small>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label required">Account Number</label>
@@ -525,7 +505,7 @@ include 'conn.php';
                                 </div>
                             </div>
 
-                            <!-- Step 4: Working Area -->
+                            <!-- Step 4: WORKING AREA -->
                             <div class="tab-pane fade" id="step4">
                                 <div class="row">
                                     <div class="col-md-12 mb-3">
@@ -533,7 +513,7 @@ include 'conn.php';
                                         <p class="text-muted">Select areas based on post applied</p>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">State</label>
+                                        <label class="form-label">State <span class="text-danger">*</span></label>
                                         <select class="form-control" id="working_state">
                                             <option value="">Select State</option>
                                             <?php
@@ -547,16 +527,12 @@ include 'conn.php';
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">District</label>
-                                        <select class="form-control" id="working_district">
-                                            <option value="">Select District</option>
-                                        </select>
+                                        <select class="form-control" id="working_district"></select>
                                         <small class="text-muted" id="districtHelp"></small>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Block</label>
-                                        <select class="form-control" id="working_block">
-                                            <option value="">Select Block</option>
-                                        </select>
+                                        <select class="form-control" id="working_block"></select>
                                         <small class="text-muted" id="blockHelp"></small>
                                     </div>
                                     <div class="col-md-12">
@@ -571,7 +547,7 @@ include 'conn.php';
                                 </div>
                             </div>
 
-                            <!-- Step 5: Photo & Payment -->
+                            <!-- Step 5 -->
                             <div class="tab-pane fade" id="step5">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
@@ -621,7 +597,6 @@ include 'conn.php';
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label required">Username</label>
                                         <input type="text" class="form-control" name="username" required>
-                                        <small class="text-muted">Must be unique</small>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label required">Password</label>
@@ -631,13 +606,11 @@ include 'conn.php';
                                                 <i class="fas fa-eye"></i>
                                             </button>
                                         </div>
-                                        <small class="text-muted">Minimum 6 characters</small>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Hidden fields for working area -->
                         <input type="hidden" name="working_state_id" id="working_state_id">
                         <input type="hidden" name="working_district_ids" id="working_district_ids">
                         <input type="hidden" name="working_block_ids" id="working_block_ids">
@@ -654,14 +627,12 @@ include 'conn.php';
     </div>
 
     <!-- View Member Modal -->
-    <div class="modal fade" id="viewMemberModal" tabindex="-1" aria-labelledby="viewMemberModalLabel" aria-hidden="true">
+    <div class="modal fade" id="viewMemberModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-info text-white">
-                    <h5 class="modal-title" id="viewMemberModalLabel">
-                        <i class="fas fa-user me-2"></i>Member Details
-                    </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title"><i class="fas fa-user me-2"></i>Member Details</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body" id="viewMemberContent"></div>
                 <div class="modal-footer">
@@ -672,15 +643,13 @@ include 'conn.php';
     </div>
 
     <!-- Edit Member Modal -->
-    <div class="modal fade" id="editMemberModal" tabindex="-1" aria-labelledby="editMemberModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editMemberModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <form id="editMemberForm" action="ajax/update_member.php" method="POST" enctype="multipart/form-data">
                     <div class="modal-header bg-warning text-white">
-                        <h5 class="modal-title" id="editMemberModalLabel">
-                            <i class="fas fa-edit me-2"></i>Edit Member
-                        </h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title"><i class="fas fa-edit me-2"></i>Edit Member</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body" id="editMemberContent"></div>
                     <div class="modal-footer">
@@ -692,7 +661,6 @@ include 'conn.php';
         </div>
     </div>
 
-    <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
@@ -704,431 +672,38 @@ include 'conn.php';
        ========================================================= */
         var currentStep = 1;
         var totalSteps = 5;
-        var formInitialized = false;
-        var STATE_OPTIONS_HTML = '';
 
         /* =========================================================
            DOC READY
            ========================================================= */
         $(document).ready(function() {
-            console.log("========================================");
-            console.log("[BOOT] Document ready");
-            console.log("========================================");
 
-            STATE_OPTIONS_HTML = $('#working_state').html() || '';
-            console.log("[BOOT] State options cached. Count =", $('#working_state option').length);
-
+            // ============================================
+            // MODAL OPEN / CLOSE
+            // ============================================
             $(document).on('click', '#createMemberBtn', function() {
                 $('#createMemberModal').modal('show');
             });
 
             $('#createMemberModal').on('shown.bs.modal', function() {
-                console.log("[BOOT] Modal shown");
-                initForm();
+                initWorkingAreaSelects();
+                applyPostRules();
+                showStep(1);
             });
 
             $('#createMemberModal').on('hidden.bs.modal', function() {
-                console.log("[BOOT] Modal closed");
-                formInitialized = false;
+                // Reset form on close
+                $('#memberForm')[0].reset();
+                destroyIfSelect2('#working_state');
+                destroyIfSelect2('#working_district');
+                destroyIfSelect2('#working_block');
             });
 
-            // CRUD handlers
-            $(document).on('click', '.view-member', function() {
-                $.post('ajax/view_member.php', {
-                    id: $(this).data('id')
-                }, function(response) {
-                    $('#viewMemberContent').html(response);
-                    $('#viewMemberModal').modal('show');
-                });
-            });
-
-            $(document).on('click', '.edit-member', function() {
-                $.post('ajax/edit_member.php', {
-                    id: $(this).data('id')
-                }, function(response) {
-                    $('#editMemberContent').html(response);
-                    $('#editMemberModal').modal('show');
-                });
-            });
-
-            $(document).on('click', '.delete-member', function() {
-                var id = $(this).data('id');
-                Swal.fire({
-                    title: 'Are you sure?',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Yes, delete it!'
-                }).then(function(result) {
-                    if (result.isConfirmed) {
-                        $.post('ajax/delete_member.php', {
-                            id: id
-                        }, function(response) {
-                            try {
-                                var res = JSON.parse(response);
-                                if (res.status === 'success') {
-                                    Swal.fire('Deleted!', res.message, 'success').then(function() {
-                                        location.reload();
-                                    });
-                                } else {
-                                    Swal.fire('Error!', res.message, 'error');
-                                }
-                            } catch (e) {
-                                Swal.fire('Error!', 'Invalid response', 'error');
-                            }
-                        });
-                    }
-                });
-            });
-
-            // Sanitizers
-            $(document).on('input', '#mobile_number', function() {
-                this.value = this.value.replace(/[^0-9]/g, '').substring(0, 10);
-            });
-            $(document).on('input', '#uid_no', function() {
-                this.value = this.value.replace(/[^0-9]/g, '').substring(0, 12);
-            });
-            $(document).on('input', '#pan_no', function() {
-                this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '').substring(0, 10);
-            });
-            $(document).on('input', '#pincode', function() {
-                this.value = this.value.replace(/[^0-9]/g, '').substring(0, 6);
-            });
-        });
-
-        /* =========================================================
-           INIT
-           ========================================================= */
-        function initForm() {
-            if (formInitialized) return;
-            formInitialized = true;
-            console.log("[INIT] Starting form initialization");
-
-            currentStep = 1;
-
-            if ($('#working_state option').length <= 1) {
-                $('#working_state').html(STATE_OPTIONS_HTML);
-            }
-
-            $('#working_state').val(null);
-            $('#working_district').html('<option value="">Select District</option>').val(null);
-            $('#working_block').html('<option value="">Select Block</option>').val(null);
-
-            buildStateSelect(true);
-            buildDistrictSelect(false, false);
-            buildBlockSelect(false, false);
-
-            bindStepNav();
-            bindPostAppliedChange();
-            bindStateChange();
-            bindDistrictChange();
-            bindFormSubmit();
-            setupPhotoUpload();
-
-            applyRules();
-            showStep(1);
-
-            console.log("[INIT] ✅ Form initialized");
-        }
-
-        /* =========================================================
-           SELECT2 BUILDERS
-           ========================================================= */
-        function buildStateSelect(enabled) {
-            var $s = $('#working_state');
-            var currentVal = $s.val();
-
-            if ($s.hasClass('select2-hidden-accessible')) {
-                $s.select2('destroy');
-            }
-
-            if ($s.find('option').length <= 1) {
-                $s.html(STATE_OPTIONS_HTML);
-            }
-
-            $s.prop('multiple', false).prop('disabled', !enabled);
-
-            $s.select2({
-                theme: 'bootstrap-5',
-                width: '100%',
-                placeholder: 'Select State',
-                dropdownParent: $('#createMemberModal'),
-                multiple: false,
-                allowClear: true
-            });
-
-            if (currentVal) {
-                $s.val(currentVal).trigger('change.select2');
-            }
-        }
-
-        function buildDistrictSelect(enabled, multiple) {
-            var $d = $('#working_district');
-            var currentVal = $d.val();
-
-            if ($d.hasClass('select2-hidden-accessible')) {
-                $d.select2('destroy');
-            }
-
-            $d.prop('multiple', !!multiple).prop('disabled', !enabled);
-
-            $d.select2({
-                theme: 'bootstrap-5',
-                width: '100%',
-                placeholder: multiple ? 'Select District(s)' : 'Select District',
-                dropdownParent: $('#createMemberModal'),
-                multiple: !!multiple,
-                maximumSelectionLength: multiple ? 5 : 1,
-                disabled: !enabled,
-                allowClear: true
-            });
-
-            if (currentVal && currentVal.length) {
-                if (!multiple && Array.isArray(currentVal)) {
-                    currentVal = currentVal.slice(0, 1);
-                }
-                $d.val(currentVal).trigger('change.select2');
-            }
-        }
-
-        function buildBlockSelect(enabled, multiple) {
-            var $b = $('#working_block');
-            var currentVal = $b.val();
-
-            if ($b.hasClass('select2-hidden-accessible')) {
-                $b.select2('destroy');
-            }
-
-            $b.prop('multiple', !!multiple).prop('disabled', !enabled);
-
-            $b.select2({
-                theme: 'bootstrap-5',
-                width: '100%',
-                placeholder: multiple ? 'Select Block(s)' : 'Select Block',
-                dropdownParent: $('#createMemberModal'),
-                multiple: !!multiple,
-                maximumSelectionLength: multiple ? 5 : 1,
-                disabled: !enabled,
-                allowClear: true
-            });
-
-            if (currentVal && currentVal.length) {
-                if (!multiple && Array.isArray(currentVal)) {
-                    currentVal = currentVal.slice(0, 1);
-                }
-                $b.val(currentVal).trigger('change.select2');
-            }
-        }
-
-        /* =========================================================
-           STEP NAV
-           ========================================================= */
-        function bindStepNav() {
-            $('.step').off('click').on('click', function() {
-                var step = parseInt($(this).data('step'));
-                if (step < currentStep) {
-                    showStep(step);
-                } else if (validateStep(currentStep)) {
-                    showStep(step);
-                }
-            });
-
-            $('#nextBtn').off('click').on('click', function() {
-                if (validateStep(currentStep) && currentStep < totalSteps) {
-                    showStep(currentStep + 1);
-                }
-            });
-
-            $('#prevBtn').off('click').on('click', function() {
-                if (currentStep > 1) {
-                    showStep(currentStep - 1);
-                }
-            });
-        }
-
-        function showStep(step) {
-            console.log("[NAV] showStep:", step);
-            currentStep = step;
-
-            $('.step').removeClass('active');
-            $('.step[data-step="' + step + '"]').addClass('active');
-            $('.tab-pane').removeClass('show active');
-            $('#step' + step).addClass('show active');
-
-            $('#prevBtn').toggle(step > 1);
-            $('#nextBtn').toggle(step < totalSteps);
-            $('#submitBtn').toggle(step === totalSteps);
-
-            if (step === 4) {
-                setTimeout(function() {
-                    if ($('#working_state option').length <= 1) {
-                        $('#working_state').html(STATE_OPTIONS_HTML);
-                        buildStateSelect(true);
-                    }
-                    applyRules();
-                }, 150);
-            }
-        }
-
-        /* =========================================================
-           STATE CHANGE → load districts
-           ========================================================= */
-        function bindStateChange() {
-            $('#working_state').off('change').on('change', function() {
-                var stateId = $(this).val();
-                console.log("[STATE] changed to:", stateId);
-
-                // ---- 1. DESTROY block Select2 FIRST ----
-                if ($('#working_block').hasClass('select2-hidden-accessible')) {
-                    $('#working_block').select2('destroy');
-                }
-                $('#working_block')
-                    .html('<option value="">Select Block</option>')
-                    .val(null)
-                    .prop('multiple', false)
-                    .prop('disabled', true);
-
-                // ---- 2. DESTROY district Select2 FIRST ----
-                if ($('#working_district').hasClass('select2-hidden-accessible')) {
-                    $('#working_district').select2('destroy');
-                }
-                $('#working_district')
-                    .html('<option value="">Select District</option>')
-                    .val(null);
-
-                // ---- 3. No state selected → disable both ----
-                if (!stateId) {
-                    buildDistrictSelect(false, false);
-                    buildBlockSelect(false, false);
-                    return;
-                }
-
-                // ---- 4. Prepare district for loading ----
-                var post = $('#post_applied').val() || '';
-                var allowMultiple = (post === 'Zonal Manager');
-
-                $('#working_district').html('<option value="">Loading districts...</option>');
-                buildDistrictSelect(false, allowMultiple);
-
-                // ---- 5. AJAX ----
-                $.ajax({
-                        url: 'ajax/fetch_districts.php',
-                        type: 'POST',
-                        data: {
-                            state_id: stateId
-                        },
-                        dataType: 'html'
-                    })
-                    .done(function(response) {
-                        console.log("[STATE] districts loaded. Length:", response.length);
-
-                        // DESTROY before setting HTML
-                        if ($('#working_district').hasClass('select2-hidden-accessible')) {
-                            $('#working_district').select2('destroy');
-                        }
-
-                        $('#working_district')
-                            .html(response)
-                            .val(null)
-                            .prop('multiple', allowMultiple)
-                            .prop('disabled', false);
-
-                        buildDistrictSelect(true, allowMultiple);
-                        bindDistrictChange();
-                    })
-                    .fail(function(xhr, status, err) {
-                        console.error("[STATE] AJAX failed:", err);
-                        $('#working_district').html('<option value="">Select District</option>');
-                        buildDistrictSelect(false, false);
-                        Swal.fire('Error', 'Failed to load districts', 'error');
-                    });
-            });
-        }
-
-        /* =========================================================
-           DISTRICT CHANGE → load blocks
-           ========================================================= */
-        function bindDistrictChange() {
-            $('#working_district').off('change').on('change', function() {
-                var post = $('#post_applied').val() || '';
-                var distVal = $(this).val();
-                console.log("[DISTRICT] changed:", distVal, "| post:", post);
-
-                // ---- 1. DESTROY block Select2 FIRST ----
-                if ($('#working_block').hasClass('select2-hidden-accessible')) {
-                    $('#working_block').select2('destroy');
-                }
-                $('#working_block')
-                    .html('<option value="">Select Block</option>')
-                    .val(null)
-                    .prop('multiple', false)
-                    .prop('disabled', true);
-
-                // ---- 2. Guard ----
-                if (post !== 'Block Coordinator') {
-                    buildBlockSelect(false, false);
-                    return;
-                }
-
-                var distArr = !distVal ? [] : (Array.isArray(distVal) ? distVal : [distVal]);
-
-                if (distArr.length === 0) {
-                    buildBlockSelect(false, false);
-                    return;
-                }
-
-                if (distArr.length > 1) {
-                    Swal.fire('Warning', 'Block Coordinator can only select ONE district', 'warning');
-                    $(this).val([distArr[0]]).trigger('change.select2');
-                    return;
-                }
-
-                var districtId = distArr[0];
-                console.log("[DISTRICT] Loading blocks for district:", districtId);
-
-                // ---- 3. Prepare block for loading ----
-                $('#working_block').html('<option value="">Loading blocks...</option>').prop('disabled', true);
-                buildBlockSelect(false, true);
-
-                // ---- 4. AJAX ----
-                $.ajax({
-                        url: 'ajax/fetch_blocks.php',
-                        type: 'POST',
-                        data: {
-                            district_id: districtId
-                        },
-                        dataType: 'html'
-                    })
-                    .done(function(response) {
-                        console.log("[DISTRICT] blocks loaded. Length:", response.length);
-
-                        if ($('#working_block').hasClass('select2-hidden-accessible')) {
-                            $('#working_block').select2('destroy');
-                        }
-
-                        $('#working_block')
-                            .html(response)
-                            .val(null)
-                            .prop('multiple', true)
-                            .prop('disabled', false);
-
-                        buildBlockSelect(true, true);
-                    })
-                    .fail(function(xhr, status, err) {
-                        console.error("[DISTRICT] AJAX failed:", err);
-                        $('#working_block').html('<option value="">Select Block</option>');
-                        buildBlockSelect(false, false);
-                        Swal.fire('Error', 'Failed to load blocks', 'error');
-                    });
-            });
-        }
-
-        /* =========================================================
-           POST APPLIED CHANGE
-           ========================================================= */
-        function bindPostAppliedChange() {
-            $('#post_applied').off('change').on('change', function() {
+            // ============================================
+            // POST APPLIED CHANGE
+            // ============================================
+            $(document).on('change', '#post_applied', function() {
                 var post = $(this).val();
-                console.log("[POST] changed to:", post);
 
                 var map = {
                     'State Nodal': '1',
@@ -1138,86 +713,487 @@ include 'conn.php';
                 };
                 $('#member_type_id').val(map[post] || '').trigger('change');
 
-                // Reset district + block (preserve state)
-                if ($('#working_district').hasClass('select2-hidden-accessible')) {
-                    $('#working_district').select2('destroy');
-                }
-                $('#working_district').html('<option value="">Select District</option>').val(null);
+                // Reset district/block (but keep state)
+                resetDistrictSelect();
+                resetBlockSelect();
 
-                if ($('#working_block').hasClass('select2-hidden-accessible')) {
-                    $('#working_block').select2('destroy');
-                }
-                $('#working_block').html('<option value="">Select Block</option>').val(null);
+                // Apply new rules
+                applyPostRules();
 
-                applyRules();
-
-                var stateVal = $('#working_state').val();
-                if (stateVal) {
-                    console.log("[POST] Re-triggering state change");
-                    setTimeout(function() {
-                        $('#working_state').trigger('change');
-                    }, 100);
+                // If state already selected, reload districts
+                var stateId = $('#working_state').val();
+                if (stateId) {
+                    loadDistricts(stateId);
                 }
             });
 
-            $('#member_type_id').off('change').on('change', function() {
-                applyRules();
+            // ============================================
+            // STATE CHANGE
+            // ============================================
+            $(document).on('change', '#working_state', function() {
+                var stateId = $(this).val();
+                resetBlockSelect();
+
+                if (!stateId) {
+                    resetDistrictSelect();
+                    return;
+                }
+                loadDistricts(stateId);
+            });
+
+            // ============================================
+            // DISTRICT CHANGE (for Block Coordinator)
+            // ============================================
+            $(document).on('change', '#working_district', function() {
+                var post = $('#post_applied').val();
+
+                if (post !== 'Block Coordinator') {
+                    resetBlockSelect();
+                    return;
+                }
+
+                var val = $(this).val();
+                var ids = !val ? [] : (Array.isArray(val) ? val : [val]);
+
+                if (ids.length === 0) {
+                    resetBlockSelect();
+                    return;
+                }
+
+                if (ids.length > 1) {
+                    Swal.fire('Warning', 'Block Coordinator can only select ONE district', 'warning');
+                    $(this).val([ids[0]]).trigger('change.select2');
+                    return;
+                }
+
+                loadBlocks(ids[0]);
+            });
+
+            // ============================================
+            // STEP NAVIGATION
+            // ============================================
+            $(document).on('click', '.step', function() {
+                var step = parseInt($(this).data('step'));
+                if (step < currentStep) {
+                    showStep(step);
+                } else if (validateStep(currentStep)) {
+                    showStep(step);
+                }
+            });
+
+            $(document).on('click', '#nextBtn', function() {
+                if (validateStep(currentStep) && currentStep < totalSteps) {
+                    showStep(currentStep + 1);
+                }
+            });
+
+            $(document).on('click', '#prevBtn', function() {
+                if (currentStep > 1) showStep(currentStep - 1);
+            });
+
+            // ============================================
+            // FORM SUBMIT
+            // ============================================
+            /* ============================================
+   FORM SUBMIT — with success/error display
+   ============================================ */
+            $(document).on('submit', '#memberForm', function(e) {
+                e.preventDefault();
+
+                var stateVal = $('#working_state').val();
+                var distVal = $('#working_district').val();
+                var blockVal = $('#working_block').val();
+
+                $('#working_state_id').val(stateVal || '');
+                $('#working_district_ids').val(!distVal ? '' : (Array.isArray(distVal) ? distVal.join(',') : distVal));
+                $('#working_block_ids').val(!blockVal ? '' : (Array.isArray(blockVal) ? blockVal.join(',') : blockVal));
+
+                // Validate all steps first
+                for (var i = 1; i <= totalSteps; i++) {
+                    if (!validateStep(i)) {
+                        showStep(i);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Validation Error',
+                            text: 'Please fill all required fields correctly.'
+                        });
+                        return false;
+                    }
+                }
+
+                var formData = new FormData(this);
+
+                Swal.fire({
+                    title: 'Processing...',
+                    text: 'Please wait while we save the member.',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    didOpen: function() {
+                        Swal.showLoading();
+                    }
+                });
+
+                $.ajax({
+                        url: $(this).attr('action'),
+                        type: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        dataType: 'json'
+                    })
+                    .done(function(res) {
+                        Swal.close();
+
+                        // Defensive: parse string response
+                        if (typeof res === 'string') {
+                            try {
+                                res = JSON.parse(res);
+                            } catch (e) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Invalid Server Response',
+                                    html: '<pre style="text-align:left;white-space:pre-wrap;font-size:12px;">' +
+                                        $('<div>').text(res).html() + '</pre>'
+                                });
+                                return;
+                            }
+                        }
+
+                        if (res && res.status === 'success') {
+                            var successHtml = (res.message || 'Member created successfully!').replace(/\n/g, '<br>');
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success!',
+                                html: successHtml,
+                                confirmButtonText: 'OK',
+                                allowOutsideClick: false
+                            }).then(function() {
+                                $('#createMemberModal').modal('hide');
+                                location.reload();
+                            });
+                        } else {
+                            var errorHtml = ((res && res.message) ? res.message : 'An unknown error occurred.').replace(/\n/g, '<br>');
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Submission Failed',
+                                html: errorHtml,
+                                confirmButtonText: 'OK'
+                            });
+                        }
+                    })
+                    .fail(function(xhr, status, error) {
+                        Swal.close();
+
+                        var rawText = xhr.responseText || '';
+                        var displayMessage = 'Server error. Please try again.';
+
+                        // Try parsing JSON error
+                        try {
+                            var parsed = JSON.parse(rawText);
+                            if (parsed && parsed.message) {
+                                displayMessage = parsed.message.replace(/\n/g, '<br>');
+                            }
+                        } catch (e) {
+                            // Show raw HTML/PHP error in a scrollable box
+                            if (rawText.length > 0 && rawText.length < 2000) {
+                                displayMessage = '<div style="text-align:left;font-family:monospace;font-size:12px;max-height:300px;overflow:auto;background:#f8f8f8;padding:10px;border-radius:5px;">' +
+                                    $('<div>').text(rawText).html() +
+                                    '</div>';
+                            } else if (rawText.length >= 2000) {
+                                displayMessage = 'Server returned a large error response. Check browser console.';
+                                console.error('[SUBMIT] Raw server response:', rawText);
+                            }
+                        }
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Server Error',
+                            html: displayMessage,
+                            width: '600px'
+                        });
+                    })
+                    .always(function() {
+                        // Safety: ensure loader is closed on every code path
+                        Swal.close();
+                    });
+            });
+
+            // ============================================
+            // PHOTO UPLOAD
+            // ============================================
+            $(document).on('change', '#passport_photo', function(e) {
+                var preview = document.getElementById('photoPreview');
+                if (!e.target.files.length) return;
+                var file = e.target.files[0];
+
+                if (!file.type.startsWith('image/')) {
+                    Swal.fire('Error', 'Only images allowed', 'error');
+                    this.value = '';
+                    preview.innerHTML = '';
+                    return;
+                }
+                if (file.size > 2 * 1024 * 1024) {
+                    Swal.fire('Error', 'Max size 2MB', 'error');
+                    this.value = '';
+                    preview.innerHTML = '';
+                    return;
+                }
+
+                var reader = new FileReader();
+                reader.onload = function(ev) {
+                    preview.innerHTML = '<img src="' + ev.target.result + '" class="preview-image"><p class="text-success mt-2">' + file.name + ' (' + (file.size / 1024).toFixed(2) + ' KB)</p>';
+                };
+                reader.readAsDataURL(file);
+            });
+        });
+
+        /* =========================================================
+           SELECT2 SAFE DESTROY
+           ========================================================= */
+        function destroyIfSelect2(selector) {
+            var $el = $(selector);
+            if ($el.hasClass('select2-hidden-accessible')) {
+                try {
+                    $el.select2('destroy');
+                } catch (e) {}
+            }
+        }
+
+        /* =========================================================
+           INIT WORKING AREA (on modal show)
+           ========================================================= */
+        function initWorkingAreaSelects() {
+            // STATE — always enabled, single select
+            destroyIfSelect2('#working_state');
+            $('#working_state').val(null).prop('disabled', false).prop('multiple', false);
+            $('#working_state').select2({
+                theme: 'bootstrap-5',
+                width: '100%',
+                placeholder: 'Select State',
+                dropdownParent: $('#createMemberModal'),
+                allowClear: true
+            });
+
+            // DISTRICT — disabled, single select
+            destroyIfSelect2('#working_district');
+            $('#working_district').empty().val(null).prop('disabled', true).prop('multiple', false);
+            $('#working_district').select2({
+                theme: 'bootstrap-5',
+                width: '100%',
+                placeholder: 'Select District',
+                dropdownParent: $('#createMemberModal'),
+                allowClear: true
+            });
+
+            // BLOCK — disabled, single select
+            destroyIfSelect2('#working_block');
+            $('#working_block').empty().val(null).prop('disabled', true).prop('multiple', false);
+            $('#working_block').select2({
+                theme: 'bootstrap-5',
+                width: '100%',
+                placeholder: 'Select Block',
+                dropdownParent: $('#createMemberModal'),
+                allowClear: true
             });
         }
 
         /* =========================================================
-           APPLY RULES
+           APPLY POST RULES — state is NEVER touched
            ========================================================= */
-        function applyRules() {
+        function applyPostRules() {
             var post = $('#post_applied').val();
-            console.log("[RULES] applying for post:", post);
 
-            var currentState = $('#working_state').val();
-
-            buildStateSelect(true);
-            if (currentState) {
-                $('#working_state').val(currentState).trigger('change.select2');
-            }
-
-            if (!post) {
-                if ($('#working_district').hasClass('select2-hidden-accessible')) {
-                    $('#working_district').select2('destroy');
-                }
-                $('#working_district').html('<option value="">Select District</option>').val(null);
-
-                if ($('#working_block').hasClass('select2-hidden-accessible')) {
-                    $('#working_block').select2('destroy');
-                }
-                $('#working_block').html('<option value="">Select Block</option>').val(null);
-
-                buildDistrictSelect(false, false);
-                buildBlockSelect(false, false);
-
-                $('#districtHelp').text('Please select post applied first');
-                $('#blockHelp').text('');
-                return;
-            }
+            // STATE always enabled
+            $('#working_state').prop('disabled', false);
 
             if (post === 'State Nodal') {
-                buildDistrictSelect(false, false);
-                buildBlockSelect(false, false);
+                $('#working_district').prop('disabled', true);
+                $('#working_block').prop('disabled', true);
                 $('#districtHelp').text('State Nodal works at state level only');
                 $('#blockHelp').text('Not applicable');
             } else if (post === 'Zonal Manager') {
-                buildDistrictSelect(true, true);
-                buildBlockSelect(false, false);
+                $('#working_district').prop('disabled', false);
+                $('#working_block').prop('disabled', true);
                 $('#districtHelp').text('Select 1 to 5 districts');
                 $('#blockHelp').text('Not required');
             } else if (post === 'District Coordinator') {
-                buildDistrictSelect(true, false);
-                buildBlockSelect(false, false);
+                $('#working_district').prop('disabled', false);
+                $('#working_block').prop('disabled', true);
                 $('#districtHelp').text('Select exactly 1 district');
                 $('#blockHelp').text('Not required');
             } else if (post === 'Block Coordinator') {
-                buildDistrictSelect(true, false);
-                buildBlockSelect(false, false);
+                $('#working_district').prop('disabled', false);
+                $('#working_block').prop('disabled', true);
                 $('#districtHelp').text('Select exactly 1 district');
                 $('#blockHelp').text('Select 1 to 5 blocks from that district');
+            } else {
+                $('#working_district').prop('disabled', true);
+                $('#working_block').prop('disabled', true);
+                $('#districtHelp').text('Please select post applied first');
+                $('#blockHelp').text('');
+            }
+        }
+
+        /* =========================================================
+           RESET DISTRICT (disable + clear + single-select)
+           ========================================================= */
+        function resetDistrictSelect() {
+            destroyIfSelect2('#working_district');
+            $('#working_district')
+                .empty()
+                .val(null)
+                .prop('multiple', false)
+                .prop('disabled', true);
+            $('#working_district').select2({
+                theme: 'bootstrap-5',
+                width: '100%',
+                placeholder: 'Select District',
+                dropdownParent: $('#createMemberModal'),
+                allowClear: true
+            });
+        }
+
+        /* =========================================================
+           RESET BLOCK
+           ========================================================= */
+        function resetBlockSelect() {
+            destroyIfSelect2('#working_block');
+            $('#working_block')
+                .empty()
+                .val(null)
+                .prop('multiple', false)
+                .prop('disabled', true);
+            $('#working_block').select2({
+                theme: 'bootstrap-5',
+                width: '100%',
+                placeholder: 'Select Block',
+                dropdownParent: $('#createMemberModal'),
+                allowClear: true
+            });
+        }
+
+        /* =========================================================
+           LOAD DISTRICTS — use Select2's AJAX data adapter
+           ========================================================= */
+        function loadDistricts(stateId) {
+            var post = $('#post_applied').val();
+            var allowMultiple = (post === 'Zonal Manager');
+
+            console.log('[LOAD] Districts for state', stateId, '| multiple:', allowMultiple);
+
+            // Fully rebuild district select fresh
+            destroyIfSelect2('#working_district');
+            $('#working_district')
+                .empty()
+                .val(null)
+                .prop('multiple', allowMultiple)
+                .prop('disabled', false);
+
+            $('#working_district').select2({
+                theme: 'bootstrap-5',
+                width: '100%',
+                placeholder: allowMultiple ? 'Select District(s)' : 'Select District',
+                dropdownParent: $('#createMemberModal'),
+                multiple: allowMultiple,
+                maximumSelectionLength: allowMultiple ? 5 : 1,
+                allowClear: true,
+                closeOnSelect: !allowMultiple,
+                // === AJAX data adapter ===
+                ajax: {
+                    url: 'ajax/fetch_districts.php',
+                    type: 'POST',
+                    dataType: 'json',
+                    delay: 0,
+                    data: function(params) {
+                        return {
+                            state_id: stateId
+                        };
+                    },
+                    processResults: function(data) {
+                        return {
+                            results: data.results
+                        };
+                    },
+                    cache: false
+                },
+                minimumResultsForSearch: 0
+            });
+
+            // Manually trigger the AJAX load
+            setTimeout(function() {
+                $('#working_district').select2('open');
+                setTimeout(function() {
+                    $('#working_district').select2('close');
+                }, 100);
+            }, 50);
+        }
+
+        /* =========================================================
+           LOAD BLOCKS — AJAX data adapter
+           ========================================================= */
+        function loadBlocks(districtId) {
+            console.log('[LOAD] Blocks for district', districtId);
+
+            destroyIfSelect2('#working_block');
+            $('#working_block')
+                .empty()
+                .val(null)
+                .prop('multiple', true)
+                .prop('disabled', false);
+
+            $('#working_block').select2({
+                theme: 'bootstrap-5',
+                width: '100%',
+                placeholder: 'Select Block(s)',
+                dropdownParent: $('#createMemberModal'),
+                multiple: true,
+                maximumSelectionLength: 5,
+                allowClear: true,
+                ajax: {
+                    url: 'ajax/fetch_blocks.php',
+                    type: 'POST',
+                    dataType: 'json',
+                    delay: 0,
+                    data: function(params) {
+                        return {
+                            district_id: districtId
+                        };
+                    },
+                    processResults: function(data) {
+                        return {
+                            results: data.results
+                        };
+                    },
+                    cache: false
+                },
+                minimumResultsForSearch: 0
+            });
+        }
+
+        /* =========================================================
+           STEP NAV
+           ========================================================= */
+        function showStep(step) {
+            currentStep = step;
+            $('.step').removeClass('active');
+            $('.step[data-step="' + step + '"]').addClass('active');
+            $('.tab-pane').removeClass('show active');
+            $('#step' + step).addClass('show active');
+            $('#prevBtn').toggle(step > 1);
+            $('#nextBtn').toggle(step < totalSteps);
+            $('#submitBtn').toggle(step === totalSteps);
+
+            if (step === 4) {
+                setTimeout(function() {
+                    applyPostRules();
+                    // Refresh Select2 containers now that tab is visible
+                    if ($('#working_state').hasClass('select2-hidden-accessible')) {
+                        $('#working_state').select2('close');
+                    }
+                    if ($('#working_district').hasClass('select2-hidden-accessible')) {
+                        $('#working_district').select2('close');
+                    }
+                }, 150);
             }
         }
 
@@ -1241,12 +1217,12 @@ include 'conn.php';
             if (step === 1) {
                 var phone = $('input[name="mobile_number"]').val();
                 if (phone && !/^[0-9]{10}$/.test(phone)) {
-                    Swal.fire('Error', 'Mobile must be exactly 10 digits', 'error');
+                    Swal.fire('Error', 'Mobile must be 10 digits', 'error');
                     valid = false;
                 }
                 var uid = $('input[name="uid_no"]').val();
                 if (uid && !/^[0-9]{12}$/.test(uid)) {
-                    Swal.fire('Error', 'Aadhar must be exactly 12 digits', 'error');
+                    Swal.fire('Error', 'Aadhar must be 12 digits', 'error');
                     valid = false;
                 }
                 var pan = $('input[name="pan_no"]').val();
@@ -1256,11 +1232,10 @@ include 'conn.php';
                 }
                 var email = $('input[name="email_id"]').val();
                 if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                    Swal.fire('Error', 'Invalid email address', 'error');
+                    Swal.fire('Error', 'Invalid email', 'error');
                     valid = false;
                 }
             }
-
             if (step === 2) {
                 var pin = $('input[name="pincode"]').val();
                 if (pin && !/^[0-9]{6}$/.test(pin)) {
@@ -1268,15 +1243,13 @@ include 'conn.php';
                     valid = false;
                 }
             }
-
             if (step === 3) {
                 var ifsc = $('input[name="ifsc_code"]').val();
                 if (ifsc && !/^[A-Z]{4}0[A-Z0-9]{6}$/.test(ifsc)) {
-                    Swal.fire('Error', 'Invalid IFSC code (e.g., SBIN0123456)', 'error');
+                    Swal.fire('Error', 'Invalid IFSC', 'error');
                     valid = false;
                 }
             }
-
             if (step === 4) {
                 var post = $('#post_applied').val();
                 if (!post) {
@@ -1292,18 +1265,14 @@ include 'conn.php';
                 var blockArr = !blockVal ? [] : (Array.isArray(blockVal) ? blockVal : [blockVal]);
 
                 var err = '';
-
-                if (post === 'State Nodal') {
-                    if (!stateVal) err = 'State Nodal: please select 1 state';
+                if (!stateVal) {
+                    err = 'Please select a state';
                 } else if (post === 'Zonal Manager') {
-                    if (!stateVal) err = 'Please select a state';
-                    else if (distArr.length < 1 || distArr.length > 5) err = 'Select 1 to 5 districts';
+                    if (distArr.length < 1 || distArr.length > 5) err = 'Select 1 to 5 districts';
                 } else if (post === 'District Coordinator') {
-                    if (!stateVal) err = 'Please select a state';
-                    else if (distArr.length !== 1) err = 'Select exactly 1 district';
+                    if (distArr.length !== 1) err = 'Select exactly 1 district';
                 } else if (post === 'Block Coordinator') {
-                    if (!stateVal) err = 'Please select a state';
-                    else if (distArr.length !== 1) err = 'Select exactly 1 district';
+                    if (distArr.length !== 1) err = 'Select exactly 1 district';
                     else if (blockArr.length < 1 || blockArr.length > 5) err = 'Select 1 to 5 blocks';
                 }
 
@@ -1312,127 +1281,9 @@ include 'conn.php';
                     valid = false;
                 }
             }
-
             return valid;
         }
 
-        /* =========================================================
-           FORM SUBMIT
-           ========================================================= */
-        function bindFormSubmit() {
-            $('#memberForm').off('submit').on('submit', function(e) {
-                e.preventDefault();
-
-                var stateVal = $('#working_state').val();
-                var distVal = $('#working_district').val();
-                var blockVal = $('#working_block').val();
-
-                $('#working_state_id').val(stateVal || '');
-                $('#working_district_ids').val(
-                    !distVal ? '' : (Array.isArray(distVal) ? distVal.join(',') : distVal)
-                );
-                $('#working_block_ids').val(
-                    !blockVal ? '' : (Array.isArray(blockVal) ? blockVal.join(',') : blockVal)
-                );
-
-                console.log("[SUBMIT] state =", stateVal);
-                console.log("[SUBMIT] districts =", $('#working_district_ids').val());
-                console.log("[SUBMIT] blocks =", $('#working_block_ids').val());
-
-                var allValid = true;
-                for (var i = 1; i <= totalSteps; i++) {
-                    if (!validateStep(i)) {
-                        allValid = false;
-                        showStep(i);
-                        break;
-                    }
-                }
-
-                if (!allValid) {
-                    Swal.fire('Error', 'Please fill all required fields correctly.', 'error');
-                    return false;
-                }
-
-                var formData = new FormData(this);
-
-                Swal.fire({
-                    title: 'Processing...',
-                    allowOutsideClick: false,
-                    didOpen: function() {
-                        Swal.showLoading();
-                    }
-                });
-
-                $.ajax({
-                        url: $(this).attr('action'),
-                        type: 'POST',
-                        data: formData,
-                        processData: false,
-                        contentType: false
-                    })
-                    .done(function(response) {
-                        Swal.close();
-                        try {
-                            var res = JSON.parse(response);
-                            if (res.status === 'success') {
-                                Swal.fire('Success!', res.message, 'success').then(function() {
-                                    $('#createMemberModal').modal('hide');
-                                    location.reload();
-                                });
-                            } else {
-                                Swal.fire('Error', res.message, 'error');
-                            }
-                        } catch (e) {
-                            console.error("[SUBMIT] JSON parse error:", e, response);
-                            Swal.fire('Error', 'Invalid server response', 'error');
-                        }
-                    })
-                    .fail(function(xhr) {
-                        Swal.close();
-                        console.error("[SUBMIT] error:", xhr.responseText);
-                        Swal.fire('Error', 'Server error. Check console.', 'error');
-                    });
-            });
-        }
-
-        /* =========================================================
-           PHOTO UPLOAD
-           ========================================================= */
-        function setupPhotoUpload() {
-            var input = document.getElementById('passport_photo');
-            var preview = document.getElementById('photoPreview');
-            if (!input) return;
-
-            input.addEventListener('change', function(e) {
-                if (!e.target.files.length) return;
-                var file = e.target.files[0];
-
-                if (!file.type.startsWith('image/')) {
-                    Swal.fire('Error', 'Only images allowed', 'error');
-                    input.value = '';
-                    preview.innerHTML = '';
-                    return;
-                }
-                if (file.size > 2 * 1024 * 1024) {
-                    Swal.fire('Error', 'Max 2MB', 'error');
-                    input.value = '';
-                    preview.innerHTML = '';
-                    return;
-                }
-
-                var reader = new FileReader();
-                reader.onload = function(ev) {
-                    preview.innerHTML =
-                        '<img src="' + ev.target.result + '" class="preview-image" alt="Preview">' +
-                        '<p class="text-success mt-2">' + file.name + ' (' + (file.size / 1024).toFixed(2) + ' KB)</p>';
-                };
-                reader.readAsDataURL(file);
-            });
-        }
-
-        /* =========================================================
-           PASSWORD TOGGLE
-           ========================================================= */
         function togglePassword(event) {
             var field = document.getElementById('passwordField');
             if (!field) return;
