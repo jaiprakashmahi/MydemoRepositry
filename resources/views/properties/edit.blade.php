@@ -9,7 +9,7 @@
 <div style="max-width:1100px; margin:0 auto;">
 
     <div style="margin-bottom:20px; font-size:0.85rem;">
-        <a href="{{ route('properties.index') }}" style="color:var(--primary); font-weight:600;">
+        <a href="{{ route('admin.properties.index') }}" style="color:var(--primary); font-weight:600;">
             <i class="fas fa-arrow-left"></i> Back to Properties
         </a>
     </div>
@@ -25,7 +25,7 @@
     </div>
     @endif
 
-    <form action="{{ route('properties.update', $property) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.properties.update', $property) }}" method="POST" enctype="multipart/form-data">
         @csrf @method('PUT')
 
         {{-- Tabs --}}
@@ -380,19 +380,19 @@
         </div>
 
         <div style="display:flex; gap:12px; justify-content:flex-end; margin-top:8px;">
-            <a href="{{ route('properties.index') }}" class="btn-outline" style="padding:12px 28px;">Cancel</a>
+            <a href="{{ route('admin.properties.index') }}" class="btn-outline" style="padding:12px 28px;">Cancel</a>
             <button type="submit" class="btn-solid" style="padding:12px 32px;"><i class="fas fa-save"></i> Update Property</button>
         </div>
     </form>
 
     {{-- Hidden delete forms for images/documents --}}
     @foreach ($property->images as $img)
-    <form id="del-img-{{ $img->id }}" action="{{ route('properties.delete-image', $img) }}" method="POST" style="display:none;">
+    <form id="del-img-{{ $img->id }}" action="{{ route('admin.properties.delete-image', $img) }}" method="POST" style="display:none;">
         @csrf @method('DELETE')
     </form>
     @endforeach
     @foreach ($property->documents as $doc)
-    <form id="del-doc-{{ $doc->id }}" action="{{ route('properties.delete-document', $doc) }}" method="POST" style="display:none;">
+    <form id="del-doc-{{ $doc->id }}" action="{{ route('admin.properties.delete-document', $doc) }}" method="POST" style="display:none;">
         @csrf @method('DELETE')
     </form>
     @endforeach

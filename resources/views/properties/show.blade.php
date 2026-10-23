@@ -9,12 +9,12 @@
 <div style="max-width:1100px; margin:0 auto;">
 
     <div style="margin-bottom:20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
-        <a href="{{ route('properties.index') }}" style="color:var(--primary); font-weight:600; font-size:0.85rem;">
+        <a href="{{ route('admin.properties.index') }}" style="color:var(--primary); font-weight:600; font-size:0.85rem;">
             <i class="fas fa-arrow-left"></i> Back to Properties
         </a>
         <div style="display:flex; gap:10px;">
-            <a href="{{ route('properties.edit', $property) }}" class="btn-solid"><i class="fas fa-edit"></i> Edit</a>
-            <form action="{{ route('properties.toggle-status', $property) }}" method="POST" style="display:inline;">
+            <a href="{{ route('admin.properties.edit', $property) }}" class="btn-solid"><i class="fas fa-edit"></i> Edit</a>
+            <form action="{{ route('admin.properties.toggle-status', $property) }}" method="POST" style="display:inline;">
                 @csrf @method('PATCH')
                 <button type="submit" class="btn-outline">
                     <i class="fas fa-power-off"></i> {{ $property->is_active ? 'Deactivate' : 'Activate' }}
@@ -284,7 +284,7 @@
             </div>
 
             {{-- Delete --}}
-            <form action="{{ route('properties.destroy', $property) }}" method="POST"
+            <form action="{{ route('admin.properties.destroy', $property) }}" method="POST"
                 onsubmit="return confirm('Delete this property permanently?');">
                 @csrf @method('DELETE')
                 <button type="submit" class="btn-outline" style="width:100%; justify-content:center; padding:12px; color:#dc2626; border-color:#fecaca;">

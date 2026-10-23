@@ -54,7 +54,7 @@ class CategoryController extends Controller
             'trashed'  => Category::onlyTrashed()->count(),
         ];
 
-        return view('categories.index', compact('categories', 'stats'));
+        return view('admin.categories.index', compact('categories', 'stats'));
     }
 
     /**
@@ -62,7 +62,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('categories.create');
+        return view('admin.categories.create');
     }
 
     /**
@@ -92,7 +92,7 @@ class CategoryController extends Controller
         Category::create($validated);
 
         return redirect()
-            ->route('categories.index')
+            ->route('admin.categories.index')
             ->with('success', 'Category created successfully!');
     }
 
@@ -101,7 +101,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return view('categories.show', compact('category'));
+        return view('admin.categories.show', compact('category'));
     }
 
     /**
@@ -109,7 +109,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('categories.edit', compact('category'));
+        return view('admin.categories.edit', compact('category'));
     }
 
     /**
@@ -141,7 +141,7 @@ class CategoryController extends Controller
         $category->update($validated);
 
         return redirect()
-            ->route('categories.index')
+            ->route('admin.categories.index')
             ->with('success', 'Category updated successfully!');
     }
 
@@ -153,7 +153,7 @@ class CategoryController extends Controller
         $category->delete();
 
         return redirect()
-            ->route('categories.index')
+            ->route('admin.categories.index')
             ->with('success', 'Category deleted successfully!');
     }
 
@@ -169,7 +169,7 @@ class CategoryController extends Controller
         $status = $category->is_active ? 'activated' : 'deactivated';
 
         return redirect()
-            ->back()
+            ->route('admin.categories.index')
             ->with('success', "Category {$status} successfully!");
     }
 }

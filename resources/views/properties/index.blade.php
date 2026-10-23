@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.admin.dashboard')
 
 @section('title', 'All Properties - RKVIT REALESTATE')
 @section('page-title', 'Property Management')
@@ -60,7 +60,7 @@
             <p>Manage your listings — {{ $properties->total() }} total</p>
         </div>
         <div class="panel-actions">
-            <a href="{{ route('properties.create') }}" class="btn-solid">
+            <a href="{{ route('admin.properties.create') }}" class="btn-solid">
                 <i class="fas fa-plus"></i> Add New Property
             </a>
         </div>
@@ -68,7 +68,7 @@
 
     {{-- Filters --}}
     <div style="padding:18px 24px; border-bottom:1px solid var(--border); background:#fafbfc;">
-        <form method="GET" action="{{ route('properties.index') }}" style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+        <form method="GET" action="{{ route('admin.properties.index') }}" style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
             <div style="position:relative; flex:1; min-width:200px;">
                 <i class="fas fa-search" style="position:absolute; left:13px; top:50%; transform:translateY(-50%); color:var(--text-muted); font-size:0.85rem;"></i>
                 <input type="text" name="search" value="{{ request('search') }}"
@@ -97,7 +97,7 @@
             </select>
 
             <button type="submit" class="btn-outline"><i class="fas fa-filter"></i> Filter</button>
-            <a href="{{ route('properties.index') }}" class="btn-outline"><i class="fas fa-redo"></i> Reset</a>
+            <a href="{{ route('admin.properties.index') }}" class="btn-outline"><i class="fas fa-redo"></i> Reset</a>
         </form>
     </div>
 
@@ -167,20 +167,20 @@
                     </td>
                     <td>
                         <div class="action-btns" style="justify-content:flex-end;">
-                            <a href="{{ route('properties.show', $property) }}" class="action-btn view" title="View">
+                            <a href="{{ route('admin.properties.show', $property) }}" class="action-btn view" title="View">
                                 <i class="fas fa-eye"></i>
                             </a>
-                            <a href="{{ route('properties.edit', $property) }}" class="action-btn edit" title="Edit">
+                            <a href="{{ route('admin.properties.edit', $property) }}" class="action-btn edit" title="Edit">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <form action="{{ route('properties.toggle-status', $property) }}" method="POST" style="display:inline;">
+                            <form action="{{ route('admin.properties.toggle-status', $property) }}" method="POST" style="display:inline;">
                                 @csrf @method('PATCH')
                                 <button type="submit" class="action-btn" title="{{ $property->is_active ? 'Deactivate' : 'Activate' }}"
                                     style="background:{{ $property->is_active ? '#fffbeb' : '#ecfdf5' }}; color:{{ $property->is_active ? '#d97706' : '#059669' }};">
                                     <i class="fas fa-power-off"></i>
                                 </button>
                             </form>
-                            <form action="{{ route('properties.destroy', $property) }}" method="POST" style="display:inline;"
+                            <form action="{{ route('admin.properties.destroy', $property) }}" method="POST" style="display:inline;"
                                 onsubmit="return confirm('Delete this property?');">
                                 @csrf @method('DELETE')
                                 <button type="submit" class="action-btn delete" title="Delete">
@@ -196,7 +196,7 @@
                         <i class="fas fa-building" style="font-size:3rem; color:#cbd5e1; margin-bottom:14px;"></i>
                         <h4 style="font-size:1rem; color:var(--text-dark); margin-bottom:6px;">No properties found</h4>
                         <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:16px;">Get started by adding your first property.</p>
-                        <a href="{{ route('properties.create') }}" class="btn-solid">
+                        <a href="{{ route('admin.properties.create') }}" class="btn-solid">
                             <i class="fas fa-plus"></i> Add New Property
                         </a>
                     </td>

@@ -74,7 +74,7 @@ class PropertyController extends Controller
         $categories = Category::active()->ordered()->get();
         $cities = City::active()->ordered()->get();
 
-        return view('properties.index', compact('properties', 'stats', 'categories', 'cities'));
+        return view('admin.properties.index', compact('properties', 'stats', 'categories', 'cities'));
     }
 
     /**
@@ -83,7 +83,7 @@ class PropertyController extends Controller
     public function create()
     {
         $data = $this->formData();
-        return view('properties.create', $data);
+        return view('admin.properties.create', $data);
     }
 
     /**
@@ -183,7 +183,7 @@ class PropertyController extends Controller
         // Increment view count
         $property->increment('views_count');
 
-        return view('properties.show', compact('property'));
+        return view('admin.properties.show', compact('property'));
     }
 
     /**
@@ -193,7 +193,7 @@ class PropertyController extends Controller
     {
         $data = $this->formData();
         $data['property'] = $property->load(['images', 'documents', 'amenities']);
-        return view('properties.edit', $data);
+        return view('admin.properties.edit', $data);
     }
 
     /**
@@ -266,7 +266,7 @@ class PropertyController extends Controller
             DB::commit();
 
             return redirect()
-                ->route('properties.index')
+                ->route('admin.properties.index')
                 ->with('success', 'Property updated successfully!');
         } catch (\Exception $e) {
             DB::rollBack();
@@ -281,7 +281,7 @@ class PropertyController extends Controller
     {
         $property->delete();
         return redirect()
-            ->route('properties.index')
+            ->route('admin.properties.index')
             ->with('success', 'Property deleted successfully!');
     }
 
@@ -410,5 +410,27 @@ class PropertyController extends Controller
     {
         $name = Str::random(20) . '_' . time() . '.' . $file->getClientOriginalExtension();
         return $file->storeAs($folder, $name, 'public');
+    }
+
+    //==================== Authorization Helpers ====================
+    public function approve(Property $property)
+    {
+        $property->update([
+            'status' => 'active',
+            'is_active' => true,
+            'published_at' => now(),
+        ]);
+
+        return back()->with('success', "Property approved and published!");
+    }
+
+    public function reject(Request $request, Property $property)
+    {
+        $property->update([
+            'status' => 'rejected',
+            'is_active' => false,
+        ]);
+
+        return back()->with('success', "Property rejected.");
     }
 }
