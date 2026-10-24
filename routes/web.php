@@ -55,6 +55,11 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::patch('users/{user}/make-admin',    [UserController::class, 'makeAdmin'])->name('users.make-admin');
     Route::patch('users/{user}/make-customer', [UserController::class, 'makeCustomer'])->name('users.make-customer');
     Route::resource('users', UserController::class);
+
+    // ===== Admin Profile =====
+    Route::get('/profile', [AdminDashboard::class, 'profile'])->name('profile');
+    Route::put('/profile', [AdminDashboard::class, 'updateProfile'])->name('profile.update');
+    Route::put('/profile/password', [AdminDashboard::class, 'updatePassword'])->name('profile.password');
 });
 
 // ============================================================
@@ -77,6 +82,11 @@ Route::middleware(['auth', 'role:customer'])->prefix('customer')->name('customer
     // ===== Profile =====
     Route::get('/profile', [CustomerDashboard::class, 'profile'])->name('profile');
     Route::put('/profile', [CustomerDashboard::class, 'updateProfile'])->name('profile.update');
+
+    // ===== Profile =====
+    Route::get('/profile', [CustomerDashboard::class, 'profile'])->name('profile');
+    Route::put('/profile', [CustomerDashboard::class, 'updateProfile'])->name('profile.update');
+    Route::put('/profile/password', [CustomerDashboard::class, 'updatePassword'])->name('profile.password');
 });
 
 // ============================================================

@@ -889,12 +889,14 @@
         </a>
 
         <div class="sidebar-user">
-            <div class="user-avatar">{{ Auth::user()->initials }}</div>
-            <div class="user-info">
-                <h4>{{ Auth::user()->name }}</h4>
-                <span>{{ Auth::user()->email }}</span>
-                <div class="admin-badge">Administrator</div>
-            </div>
+            <a href="{{ route('admin.profile') }}" class="sidebar-user" style="text-decoration:none;">
+                <div class="user-avatar">{{ Auth::user()->initials ?? strtoupper(substr(Auth::user()->name ?? 'A', 0, 2)) }}</div>
+                <div class="user-info">
+                    <h4>{{ Auth::user()->name ?? 'Admin' }}</h4>
+                    <span>{{ Auth::user()->email ?? '' }}</span>
+                    <div class="admin-badge">Administrator</div>
+                </div>
+            </a>
         </div>
 
         <nav class="sidebar-menu">
@@ -1052,13 +1054,18 @@
             </div>
 
             {{-- ============ SETTINGS ============ --}}
-            <div class="menu-parent">
+            <div class="menu-parent {{ request()->routeIs('admin.profile*') ? 'open' : '' }}">
                 <div class="menu-item menu-toggle-item">
                     <i class="fas fa-cog menu-icon"></i>
                     <span class="menu-label">Settings</span>
                     <i class="fas fa-chevron-right menu-arrow"></i>
                 </div>
                 <div class="submenu">
+                    <a href="{{ route('admin.profile') }}"
+                        class="submenu-item {{ request()->routeIs('admin.profile') ? 'active' : '' }}">
+                        <i class="fas fa-user-cog" style="width:14px; font-size:0.75rem;"></i>
+                        Profile Settings
+                    </a>
                     <a href="#" class="submenu-item">
                         <i class="fas fa-globe" style="width:14px; font-size:0.75rem;"></i>
                         Site Settings

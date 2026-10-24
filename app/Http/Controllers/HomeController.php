@@ -63,6 +63,7 @@ class HomeController extends Controller
             'total_properties' => Property::where('status', 'active')->count(),
             'total_users'      => \App\Models\User::where('role', 'customer')->count(),
             'total_cities'     => City::where('is_active', true)->count(),
+            'featured'         => Property::where('is_featured', true)->count(),
         ];
 
         return view('welcome', compact(

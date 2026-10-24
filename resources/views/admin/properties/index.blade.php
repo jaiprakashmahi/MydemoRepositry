@@ -121,9 +121,9 @@
                     <td>
                         <div class="property-cell">
                             @if ($property->primaryImage)
-                            <img class="property-thumb" src="{{ $property->primaryImage->url }}" alt="{{ $property->title }}">
+                            <img class="property-thumb" src="{{ $property->primaryImage->url }}" alt="{{ $property->title }}" style="height:60px; width:80px; object-fit:cover;">
                             @elseif ($property->featured_image)
-                            <img class="property-thumb" src="{{ asset('storage/' . $property->featured_image) }}" alt="{{ $property->title }}">
+                            <img class="property-thumb" src="{{ asset('storage/' . $property->featured_image) }}" alt="{{ $property->title }}" style=" height:60px; width:80px; object-fit:cover;">
                             @else
                             <div class="property-thumb" style="background:#eef2f6; display:flex; align-items:center; justify-content:center; color:#94a3b8;">
                                 <i class="fas fa-image"></i>
